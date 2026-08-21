@@ -8,3 +8,18 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Django
+db.sqlite3
+*.sqlite3
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

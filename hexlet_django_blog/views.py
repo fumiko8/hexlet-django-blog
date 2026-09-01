@@ -1,4 +1,7 @@
 from django.views.generic import TemplateView
+from django.urls import reverse
+from django.shortcuts import redirect
+
 
 class IndexView(TemplateView):
     """Главная страница"""
@@ -12,3 +15,7 @@ class IndexView(TemplateView):
 class AboutView(TemplateView):
     """Страница 'О нас' """
     template_name = 'about.html'
+
+def home_redirect(request):
+    url = reverse('article:article', kwargs={'tag': 'python', 'article_id': 42})
+    return redirect(url)

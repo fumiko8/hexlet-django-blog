@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}Статьи{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1>Список статей</h1>
+    
+    <ul>
+      {% for article in articles %}
+        <li>
+          <h2><a href="{% url 'article:articles_show' article.pk %}">{{ article.name }}</a></h2>
+          <p>{{ article.body|slice:":200" }}</p>
+        </li>
+      {% empty %}
+        <li>Статей пока нет</li>
+      {% endfor %}
+    </ul>
+    
+    <!-- Пагинация -->
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">← Назад</a>
+    {% endif %}
+    
+    <span>Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+    
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">Вперёд →</a>
+    {% endif %}
+  </div>
+{% endblock %}

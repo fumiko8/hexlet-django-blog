@@ -23,7 +23,6 @@ from .views import IndexView, AboutView, home_redirect
 
 urlpatterns = [
     path("", home_redirect, name = 'home'),
-
     path("about/", AboutView.as_view(), name = 'about'),
     path("articles/", include("hexlet_django_blog.article.urls")),
     path('admin/', admin.site.urls),

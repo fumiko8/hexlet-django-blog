@@ -14,6 +14,18 @@ class Article(models.Model):
         verbose_name_plural = "Статьи"
 
 
+class ArticleComment(models.Model):
+    article = models.ForeignKey(
+        Article,
+        on_delete=models.CASCADE,
+        related_name='comments',
+        null=True,           # ← разрешаем NULL в БД
+        blank=True,          # ← разрешаем пустое значение в форме
+    )
+    content = models.TextField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
 class Employee(models.Model):
     TRAINEE = 'TR'
     JUNIOR = 'JR'

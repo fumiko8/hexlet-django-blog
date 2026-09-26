@@ -6,12 +6,17 @@
 {% block content %}
   <div class="container mt-4">
     <h1>Список статей</h1>
-    
+    <a href="{% url 'article:articles_create' %}">создать статью</a>
     <ul>
       {% for article in articles %}
         <li>
           <h2><a href="{% url 'article:articles_show' article.pk %}">{{ article.name }}</a></h2>
           <p>{{ article.body|slice:":200" }}</p>
+          <a href="{% url 'article:articles_update' article.pk %}">редактировать статью</a>
+          <form action="{% url 'article:articles_delete' article.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Удалить</button>
+          </form>
         </li>
       {% empty %}
         <li>Статей пока нет</li>

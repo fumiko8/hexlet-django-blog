@@ -1,9 +1,14 @@
 from django.shortcuts import redirect, render
 from django.views import View
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from hexlet_django_blog.forms import ArticleCommentForm
 from .models import Article
+
+from django.urls import reverse_lazy
+from .forms import ArticleForm
+from django.contrib.messages.views import SuccessMessageMixin
+
 
 
 class IndexView(View):
@@ -46,3 +51,21 @@ class ArticleDetailView(DetailView):
         context = self.get_context_data()
         context['form'] = form
         return self.render_to_response(context)
+
+
+class ArticleCreateView(SuccessMessageMixin, CreateView):
+    model = Article
+    form_class = ArticleForm
+    success_url = reverse_lazy("article:list")
+    success_message = "Статья успешно создана"
+
+class ArticleUpdateView(SuccessMessageMixin, UpdateView):
+    model = Article
+    form_class = ArticleForm
+    success_url = reverse_lazy("article:list")
+    success_message = "Статья успешно обновлена"
+
+class ArticleDeleteView(SuccessMessageMixin, DeleteView):
+    model= Article
+    success_url = reverse_lazy('article:list')
+    success_message = "Статья успешно удалена"

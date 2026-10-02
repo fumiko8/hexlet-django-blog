@@ -5,6 +5,7 @@
   <p>Вы уверены, что хотите удалить статью «{{ article.name }}»?</p>
   <form method="post">
     {% csrf_token %}
-    <button type="submit">Да, удалить</button>
+    <button type="submit" class="btn btn-outline-danger">Да, удалить</button>
+    <a href="{% url 'article:articles_show' article.pk %}" class="btn btn-secondary">Отмена</a>
   </form>
 {% endblock %}

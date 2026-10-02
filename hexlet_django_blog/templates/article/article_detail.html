@@ -5,7 +5,11 @@
   <div>{{ article.body }}</div>
 
   <hr>
-
+  <div class="d-flex mb-3">
+    <a href="{% url 'article:articles_update' article.pk %}" class="btn btn-outline-dark mr-2">Редактировать</a>
+    <a href="{% url 'article:articles_delete' article.pk %}" class="btn btn-outline-danger">Удалить</a>
+  </div>
+  
   <h2>Комментарии</h2>
   <ul>
     {% for comment in article.comments.all %}
@@ -16,9 +20,9 @@
   </ul>
 
   <h2>Оставить комментарий</h2>
-  <form action="" method="post">
+  <form action="" method="post" class="mt-3">
     {% csrf_token %}
     {{ form }}
-    <input type="submit" value="Сохранить" />
+    <input type="submit" value="Сохранить" class="btn btn-outline-dark mt-3"/>
   </form>
 {% endblock %}

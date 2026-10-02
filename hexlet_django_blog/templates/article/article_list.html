@@ -5,19 +5,29 @@
 
 {% block content %}
   <div class="container mt-4">
-    <h1>Список статей</h1>
-    <a href="{% url 'article:articles_create' %}">создать статью</a>
-    <ul>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1>Список статей</h1>
+      <a href="{% url 'article:articles_create' %}" class="btn btn-outline-dark">Создать статью</a>
+    </div>
+    <div class="row">
       {% for article in articles %}
-        <li>
-          <h2><a href="{% url 'article:articles_show' article.pk %}">{{ article.name }}</a></h2>
-          <p>{{ article.body|slice:":200" }}</p>
-          <a href="{% url 'article:articles_update' article.pk %}">редактировать статью</a>
-          <form action="{% url 'article:articles_delete' article.pk %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Удалить</button>
-          </form>
-        </li>
+        <div class="col-md-12 mb-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">
+                <a href="{% url 'article:articles_show' article.pk %}" class="text-decoration-none text-dark">
+                  {{ article.name }}
+                </a>
+              </h5>
+              <p class="card-text text-muted flex-grow-1">
+                {{ article.body|slice:":150" }}...
+              </p>
+              <a href="{% url 'article:articles_show' article.pk %}" class="btn btn-outline-dark btn-sm mt-2 align-self-start">
+                Читать далее
+              </a>
+            </div>
+          </div>
+        </div>
       {% empty %}
         <li>Статей пока нет</li>
       {% endfor %}

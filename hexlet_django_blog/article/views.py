@@ -67,5 +67,7 @@ class ArticleUpdateView(SuccessMessageMixin, UpdateView):
 
 class ArticleDeleteView(SuccessMessageMixin, DeleteView):
     model= Article
+    template_name = "article/article_confirm_delete.html"
+    context_object_name = "article"
     success_url = reverse_lazy('article:list')
     success_message = "Статья успешно удалена"

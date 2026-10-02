@@ -21,10 +21,7 @@ def home_redirect(request):
     # Редирект на первую статью в БД
     first_article = Article.objects.first()
     if first_article:
-        url = reverse('article:article', kwargs={
-            'tag': 'python',
-            'article_id': first_article.pk
-        })
+        url = reverse('article:list')
     else:
         url = reverse('about')
     return redirect(url)

@@ -6,13 +6,15 @@
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Django simple blog</title>
+    <title>Fumiko8 blog</title>
     {% bootstrap_css %}
   </head>
   <body class="bg-light">
     <div class="container mt-4">
       <h1>О блоге</h1>
-      <p>Эксперименты с Django на Хекслете</p>
+      <p>Приветствую в моем блоге!</p>
+      <p>Я Fumiko8, начинающий разработчик и большой любитель видеоигр</p>
+      <a href="{% url 'article:list' %}" class="btn btn-outline-dark">К статьям</a>
     </div>
   </body>
 </html>

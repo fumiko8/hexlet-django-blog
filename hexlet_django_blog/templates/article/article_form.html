@@ -1,19 +1,37 @@
 {% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}
+  {% if form.instance.pk %}Редактировать статью{% else %}Создать статью{% endif %}
+{% endblock %}
 
 {% block content %}
-  <h1>
-    {% if form.instance.pk %}Редактировать{% else %}Создать{% endif %} статью
-  </h1>
-  {% if form.errors %}
-  <ul>
-    {% for field, errors in form.errors.items %}
-      <li>{{ field }}: {{ errors|join:", " }}</li>
-    {% endfor %}
-  </ul>
-    {% endif %}
-  <form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit" class="btn btn-outline-dark">Сохранить</button>
-  </form>
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+
+        <div class="card shadow-sm">
+          <div class="card-body">
+
+            <h1 class="card-title h3 mb-4">
+              {% if form.instance.pk %}
+                Редактировать статью
+              {% else %}
+                Создать статью
+              {% endif %}
+            </h1>
+
+            <form method="post" novalidate>
+              {% csrf_token %}
+              {% bootstrap_form form %}
+              {% bootstrap_button "Сохранить" button_type="submit" button_class="btn btn-outline-success" %}
+              <a href="{% url 'article:list' %}" class="btn btn-outline-secondary ml-2">Отмена</a>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 {% endblock %}

@@ -29,9 +29,8 @@
           </div>
         </div>
       {% empty %}
-        <li>Статей пока нет</li>
+        <p>Статей пока нет</p>
       {% endfor %}
-    </ul>
     
     <!-- Пагинация -->
     {% if page_obj.has_previous %}
